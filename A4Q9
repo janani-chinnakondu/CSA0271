@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// Define the union student
+union Student {
+    char name[50];
+    float gpa;
+};
+
+int main() {
+    union Student student; // Declare a student of type union Student
+
+    // Prompt the user to enter the student's name
+    printf("Enter student's name (up to 50 characters): ");
+    scanf("%s", student.name);
+
+    // Prompt the user to enter the student's GPA
+    printf("Enter student's GPA: ");
+    scanf("%f", &student.gpa);
+
+    // Print the student's name and GPA
+    printf("\nStudent's name: %s\n", student.name);
+    printf("Student's GPA: %.2f\n", student.gpa);
+
+    return 0;
+}
