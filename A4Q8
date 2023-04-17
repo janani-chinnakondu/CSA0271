@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+union Data {
+    int integer;
+    float floating;
+};
+
+int main() {
+    union Data data;
+    int choice;
+
+    printf("Enter a value (1 for integer, 2 for float): ");
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        printf("Enter an integer value: ");
+        scanf("%d", &data.integer);
+        printf("You entered: %d\n", data.integer);
+    } else if (choice == 2) {
+        printf("Enter a float value: ");
+        scanf("%f", &data.floating);
+        printf("You entered: %.2f\n", data.floating);
+    } else {
+        printf("Invalid choice. Exiting...\n");
+        return 1;
+    }
+
+    return 0;
+}
