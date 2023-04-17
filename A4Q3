@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+struct Student {
+    char name[100];
+    int rollNumber;
+    int birthDay;
+    int birthMonth;
+    int birthYear;
+    int admissionDay;
+    int admissionMonth;
+    int admissionYear;
+};
+
+int calculateAge(int birthDay, int birthMonth, int birthYear, int admissionDay, int admissionMonth, int admissionYear) {
+    time_t now = time(0);
+    struct tm* currentTime = localtime(&now);
+
+    int currentYear = 1900 + currentTime->tm_year;
+    int currentMonth = 1 + currentTime->tm_mon;
+    int currentDay = currentTime->tm_mday;
+
+    int age = currentYear - birthYear;
+
+    if (currentMonth < birthMonth) {
+        age--;
+    } else if (currentMonth == birthMonth && currentDay < birthDay) {
+        age--;
+    }
+
+    return age;
+}
+
+int main() {
+    struct Student student;
+
+    printf("Enter student name: ");
+    fgets(student.name, sizeof(student.name), stdin);
+
+    printf("Enter roll number: ");
+    scanf("%d", &student.rollNumber);
+
+    printf("Enter birth date (dd mm yyyy): ");
+    scanf("%d %d %d", &student.birthDay, &student.birthMonth, &student.birthYear);
+
+    printf("Enter admission date (dd mm yyyy): ");
+    scanf("%d %d %d", &student.admissionDay, &student.admissionMonth, &student.admissionYear);
+
+    int age = calculateAge(student.birthDay, student.birthMonth, student.birthYear, student.admissionDay, student.admissionMonth, student.admissionYear);
+
+    printf("\n--- Student Information ---\n");
+    printf("Name: %s", student.name);
+    printf("Roll Number: %d\n", student.rollNumber);
+    printf("Birth Date: %d/%d/%d\n", student.birthDay, student.birthMonth, student.birthYear);
+    printf("Admission Date: %d/%d/%d\n", student.admissionDay, student.admissionMonth, student.admissionYear);
+    printf("Age at the time of admission: %d years\n", age);
+
+    return 0;
+}
